@@ -18,12 +18,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import med.voll.api.medico.Medico;
-import med.voll.api.medico.MedicoDTO;
-import med.voll.api.medico.MedicoInfoDTO;
-import med.voll.api.medico.MedicoListDTO;
-import med.voll.api.medico.MedicoRepository;
-import med.voll.api.medico.MedicoUpdateDTO;
+import med.voll.api.domain.medico.Medico;
+import med.voll.api.domain.medico.MedicoDTO;
+import med.voll.api.domain.medico.MedicoInfoDTO;
+import med.voll.api.domain.medico.MedicoListDTO;
+import med.voll.api.domain.medico.MedicoRepository;
+import med.voll.api.domain.medico.MedicoUpdateDTO;
 
 @RestController
 @RequestMapping("/medicos")
