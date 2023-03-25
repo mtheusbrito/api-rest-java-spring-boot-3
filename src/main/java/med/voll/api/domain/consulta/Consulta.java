@@ -43,6 +43,7 @@ public class Consulta {
 	
 	@Enumerated(EnumType.STRING)
 	private MotivoCancelamento motivoCancelamento;
+
 	private Boolean ativo;
 
 
