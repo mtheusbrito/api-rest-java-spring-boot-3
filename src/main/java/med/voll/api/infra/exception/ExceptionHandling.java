@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import jakarta.persistence.EntityNotFoundException;
+import med.voll.api.domain.ValidacaoException;
 
 @RestControllerAdvice
 public class ExceptionHandling {
@@ -52,14 +53,26 @@ public class ExceptionHandling {
     @ExceptionHandler(Exception.class)
     public ResponseEntity tratarErro500(Exception ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MensagemErroValidacao(ex.getLocalizedMessage()));
+        
+        
+        
     }
 
+    
+    @ExceptionHandler(ValidacaoException.class)
+    public ResponseEntity<MensagemErroValidacao> businesException(ValidacaoException ex) {
+    	return ResponseEntity.badRequest().body(new MensagemErroValidacao(ex.getMessage()));
+    	
+    }
+    
     private record DadosErroValidacao(String campo, String mensagem) {
         public DadosErroValidacao(FieldError erro) {
             this(erro.getField(), erro.getDefaultMessage());
         }
     }
     
+    
+   
     
     private record MensagemErroValidacao(String mensagem) {
     	

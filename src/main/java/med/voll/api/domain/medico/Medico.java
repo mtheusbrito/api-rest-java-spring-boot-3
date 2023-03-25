@@ -1,5 +1,6 @@
 package med.voll.api.domain.medico;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,7 +18,6 @@ import med.voll.api.domain.endereco.Endereco;
 
 @Entity(name="MEDICO")
 @Table(name="MEDICO")
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -31,6 +31,7 @@ public class Medico {
 	private String telefone;
 	private String email;
 	private String crm;
+	
 	private Boolean ativo; 
 	
 	@Enumerated(EnumType.STRING)
@@ -40,7 +41,7 @@ public class Medico {
 	private Endereco endereco;
 	
 	public Medico(MedicoDTO dados) {
-		this.ativo = Boolean.TRUE;
+		this.ativo = Boolean.FALSE;
 		this.nome = dados.nome();
 		this.email= dados.email();
 		this.telefone = dados.telefone();
