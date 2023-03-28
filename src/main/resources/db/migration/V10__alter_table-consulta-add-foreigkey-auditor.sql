@@ -1,0 +1,2 @@
+alter table CONSULTA add constraint fk_consulta_criadoPor_id foreign key(criadoPor_id) references USUARIO(id);
+alter table CONSULTA add constraint fk_consulta_modificadoPor_id foreign key(modificadoPor_id) references USUARIO(id);

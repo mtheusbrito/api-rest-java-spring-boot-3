@@ -1,5 +1,7 @@
 package med.voll.api.domain.medico;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -14,6 +16,8 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import med.voll.api.domain.Entidade;
 import med.voll.api.domain.endereco.Endereco;
 
 @Entity(name="MEDICO")
@@ -22,9 +26,13 @@ import med.voll.api.domain.endereco.Endereco;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Medico {
+public class Medico implements Serializable{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;

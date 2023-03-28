@@ -11,9 +11,10 @@ import med.voll.api.domain.consulta.validacoes.ValidadorCancelamentoDeConsulta;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.paciente.PacienteRepository;
+import med.voll.api.services.ServiceProjeto;
 
 @Service
-public class AgendaService {
+public class AgendaService  extends ServiceProjeto{
 
 @Autowired
 private ConsultaRepository repository;
@@ -31,8 +32,6 @@ private List<ValidadorAgendamentoDeConsulta> validadores;
 
 @Autowired
 private List<ValidadorCancelamentoDeConsulta> validadorCancelamentoDeConsultas;
-
-
 
 
 
@@ -63,10 +62,9 @@ private List<ValidadorCancelamentoDeConsulta> validadorCancelamentoDeConsultas;
 		}
 		var paciente = pacienteRepository.getReferenceById(agendamentoDTO.idPaciente());
 	
-		var consulta = new Consulta(null, medico, paciente, agendamentoDTO.data(), null,Boolean.TRUE);
-	
+		var consulta = new Consulta(medico, paciente, agendamentoDTO.data(), null,Boolean.TRUE);
 		
-	
+		System.out.println(usuarioLogado().getId());
 		repository.save(consulta);
 		
 		

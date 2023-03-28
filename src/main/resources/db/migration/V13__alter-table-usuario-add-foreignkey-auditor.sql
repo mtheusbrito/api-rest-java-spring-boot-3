@@ -1,0 +1,2 @@
+alter table USUARIO add constraint fk_usuario_criadoPor_id foreign key(criadoPor_id) references USUARIO(id);
+alter table USUARIO add constraint fk_usuario_modificadoPor_id foreign key(modificadoPor_id) references USUARIO(id);

@@ -18,6 +18,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import med.voll.api.domain.Entidade;
 import med.voll.api.infra.security.CustomPasswordEncoder;
 
 @Table(name="USUARIO")
@@ -25,11 +26,13 @@ import med.voll.api.infra.security.CustomPasswordEncoder;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
-public class Usuario implements UserDetails{
+public class Usuario extends Entidade implements UserDetails{
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String login;
 	private String senha;
 	
