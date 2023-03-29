@@ -49,7 +49,7 @@ public class Medico implements Serializable{
 	private Endereco endereco;
 	
 	public Medico(MedicoDTO dados) {
-		this.ativo = Boolean.FALSE;
+		this.ativo = Boolean.TRUE;
 		this.nome = dados.nome();
 		this.email= dados.email();
 		this.telefone = dados.telefone();
@@ -79,6 +79,7 @@ public class Medico implements Serializable{
 		if(dados.endereco()!=null) {
 			this.endereco.atualizaInformacoes(dados.endereco());
 		}
+		
 		
 	}
 

@@ -15,7 +15,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import med.voll.api.domain.consulta.AgendaService;
 import med.voll.api.domain.consulta.AgendamentoDTO;
-import med.voll.api.domain.consulta.AgendamentoInfoDTO;
+import med.voll.api.domain.consulta.AgendamentoResponseDTO;
 import med.voll.api.domain.consulta.CancelarAgendamentoDTO;
 
 @RestController
@@ -27,7 +27,7 @@ public class ConsultaController {
 	private AgendaService service;
 
 	@PostMapping
-	public ResponseEntity<AgendamentoInfoDTO> agendar(@RequestBody @Valid AgendamentoDTO agendamento) {
+	public ResponseEntity<AgendamentoResponseDTO> agendar(@RequestBody @Valid AgendamentoDTO agendamento) {
 		var dto =  service.agendar(agendamento);
 		return ResponseEntity
 				.ok(dto);

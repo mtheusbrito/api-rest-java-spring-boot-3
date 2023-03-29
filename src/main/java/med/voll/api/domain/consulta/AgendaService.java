@@ -38,7 +38,7 @@ private List<ValidadorCancelamentoDeConsulta> validadorCancelamentoDeConsultas;
 
 
 
-	public AgendamentoInfoDTO agendar(AgendamentoDTO agendamentoDTO) {
+	public AgendamentoResponseDTO agendar(AgendamentoDTO agendamentoDTO) {
 
 	
 		
@@ -68,7 +68,7 @@ private List<ValidadorCancelamentoDeConsulta> validadorCancelamentoDeConsultas;
 		repository.save(consulta);
 		
 		
-		return new AgendamentoInfoDTO(consulta);
+		return new AgendamentoResponseDTO(consulta);
 
 	
 	}

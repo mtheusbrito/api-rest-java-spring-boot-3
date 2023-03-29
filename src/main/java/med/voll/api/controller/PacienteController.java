@@ -17,7 +17,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.paciente.Paciente;
 import med.voll.api.domain.paciente.PacienteDTO;
-import med.voll.api.domain.paciente.PacienteInfoDTO;
+import med.voll.api.domain.paciente.PacienteResponseDTO;
 import med.voll.api.domain.paciente.PacienteRepository;
 
 @RestController
@@ -33,21 +33,21 @@ public class PacienteController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity<PacienteInfoDTO> cadastrar(@RequestBody @Valid PacienteDTO pacienteDTO, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<PacienteResponseDTO> cadastrar(@RequestBody @Valid PacienteDTO pacienteDTO, UriComponentsBuilder uriBuilder) {
 		var paciente = new Paciente(pacienteDTO);
 		repository.save(paciente);
 		var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
 		
-		return ResponseEntity.created(uri).body(new PacienteInfoDTO(paciente));
+		return ResponseEntity.created(uri).body(new PacienteResponseDTO(paciente));
 
 	} 
 	
 	
 	@GetMapping
-	public ResponseEntity<Page<PacienteInfoDTO>> listar(
+	public ResponseEntity<Page<PacienteResponseDTO>> listar(
 			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
 //		return repository.findAll().stream().map(MedicoListDTO::new).toList();
-		var page = repository.findAllByAtivoTrue(paginacao).map(PacienteInfoDTO::new);
+		var page = repository.findAllByAtivoTrue(paginacao).map(PacienteResponseDTO::new);
 		return ResponseEntity.ok(page);
 	}
 }

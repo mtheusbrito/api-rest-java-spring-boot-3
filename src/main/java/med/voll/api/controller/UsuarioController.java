@@ -13,7 +13,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import med.voll.api.domain.usuario.Usuario;
 import med.voll.api.domain.usuario.UsuarioDTO;
-import med.voll.api.domain.usuario.UsuarioInfoDTO;
+import med.voll.api.domain.usuario.UsuarioResponseDTO;
 import med.voll.api.domain.usuario.UsuarioRepository;
 import med.voll.api.infra.security.CustomPasswordEncoder;
 
@@ -35,7 +35,7 @@ public class UsuarioController {
 		repository.save(usuario);
 		var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
 		
-		return ResponseEntity.created(uri).body(new UsuarioInfoDTO(usuario));
+		return ResponseEntity.created(uri).body(new UsuarioResponseDTO(usuario));
 	}
 
 }

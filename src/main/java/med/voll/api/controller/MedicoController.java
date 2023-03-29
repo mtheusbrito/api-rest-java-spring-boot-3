@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import med.voll.api.domain.medico.Medico;
 import med.voll.api.domain.medico.MedicoDTO;
-import med.voll.api.domain.medico.MedicoInfoDTO;
+import med.voll.api.domain.medico.MedicoResponseDTO;
 import med.voll.api.domain.medico.MedicoListDTO;
 import med.voll.api.domain.medico.MedicoRepository;
 import med.voll.api.domain.medico.MedicoUpdateDTO;
@@ -36,12 +36,12 @@ public class MedicoController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<MedicoInfoDTO> cadastrar(@RequestBody @Valid MedicoDTO medicoDTO, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<MedicoResponseDTO> cadastrar(@RequestBody @Valid MedicoDTO medicoDTO, UriComponentsBuilder uriBuilder) {
 		var medico = new Medico(medicoDTO);
 		repository.save(medico);
 		var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
 		
-		return ResponseEntity.created(uri).body(new MedicoInfoDTO(medico));
+		return ResponseEntity.created(uri).body(new MedicoResponseDTO(medico));
 
 	}
 
@@ -55,10 +55,10 @@ public class MedicoController {
 
 	@PutMapping
 	@Transactional
-	public ResponseEntity<MedicoInfoDTO> atualizar(@RequestBody @Valid MedicoUpdateDTO medicoDTO) {
+	public ResponseEntity<MedicoResponseDTO> atualizar(@RequestBody @Valid MedicoUpdateDTO medicoDTO) {
 		var medico = repository.getReferenceById(medicoDTO.id());
 		medico.atualizarInformacoes(medicoDTO);
-		return ResponseEntity.ok(new MedicoInfoDTO(medico));
+		return ResponseEntity.ok(new MedicoResponseDTO(medico));
 	}
 
 	@DeleteMapping("/{id}")
@@ -70,9 +70,9 @@ public class MedicoController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<MedicoInfoDTO> show(@PathVariable @NotNull Long id){
+	public ResponseEntity<MedicoResponseDTO> show(@PathVariable @NotNull Long id){
 		var medico = repository.getReferenceById(id);
-		return ResponseEntity.ok(new MedicoInfoDTO(medico));
+		return ResponseEntity.ok(new MedicoResponseDTO(medico));
 		
 	}
 }
