@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -27,6 +28,7 @@ import med.voll.api.domain.medico.MedicoUpdateDTO;
 
 @RestController
 @RequestMapping("/medicos")
+@SecurityRequirement(name = "bearer-token")
 public class MedicoController {
 
 	@Autowired

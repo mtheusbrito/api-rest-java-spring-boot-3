@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +20,7 @@ import med.voll.api.domain.consulta.CancelarAgendamentoDTO;
 
 @RestController
 @RequestMapping("consultas")
+@SecurityRequirement(name = "bearer-token")
 public class ConsultaController {
 
 	@Autowired
