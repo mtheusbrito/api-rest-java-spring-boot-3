@@ -18,19 +18,20 @@ public class SecurityConfigurations {
 
 	@Autowired
 	private SecurityFilter securityFilter;
-
+	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
 				.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-				.authorizeHttpRequests().requestMatchers(HttpMethod.POST, "/login").permitAll()
+				.authorizeHttpRequests()
+				.requestMatchers(securityFilter.getPublicRoutes()).permitAll()
 				.anyRequest()
 				.authenticated()
 				.and().addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
 
 	}
 
-	@Bean
+	@Bean 
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
 		return configuration.getAuthenticationManager();
 
