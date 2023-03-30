@@ -20,67 +20,65 @@ import lombok.ToString;
 import med.voll.api.domain.Entidade;
 import med.voll.api.domain.endereco.Endereco;
 
-@Entity(name="MEDICO")
-@Table(name="MEDICO")
+@Entity(name = "MEDICO")
+@Table(name = "MEDICO")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Medico implements Serializable{
-
+public class Medico implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String telefone;
 	private String email;
 	private String crm;
-	
-	private Boolean ativo; 
-	
+
+	private Boolean ativo;
+
 	@Enumerated(EnumType.STRING)
 	private Especialidade especialidade;
-	
+
 	@Embedded
 	private Endereco endereco;
-	
+
 	public Medico(MedicoDTO dados) {
 		this.ativo = Boolean.TRUE;
-		this.nome = dados.nome();
-		this.email= dados.email();
-		this.telefone = dados.telefone();
-		this.crm = dados.crm();
-		this.endereco = new Endereco(dados.endereco());
-		this.especialidade = dados.especialidade();
-			
-		
+		this.nome = dados.getNome();
+		this.email = dados.getEmail();
+		this.telefone = dados.getTelefone();
+		this.crm = dados.getCrm();
+		this.endereco = new Endereco(dados.getEndereco());
+		this.especialidade = dados.getEspecialidade();
+
 	}
 
 	public void atualizarInformacoes(@Valid MedicoUpdateDTO dados) {
-		if(dados.nome()!=null) {
-			this.nome = dados.nome();
+		if (dados.getNome() != null) {
+			this.nome = dados.getNome();
 		}
-		if(dados.email()!=null) {
-			this.email = dados.email();
+		if (dados.getEmail() != null) {
+			this.email = dados.getEmail();
 		}
-		if(dados.telefone()!=null) {
-			this.telefone = dados.telefone();
+		if (dados.getTelefone() != null) {
+			this.telefone = dados.getTelefone();
 		}
-		if(dados.crm()!=null) {
-			this.crm = dados.crm();
+		if (dados.getCrm() != null) {
+			this.crm = dados.getCrm();
 		}
-		if(dados.especialidade()!=null) {
-			this.especialidade = dados.especialidade();
+		if (dados.getEspecialidade() != null) {
+			this.especialidade = dados.getEspecialidade();
 		}
-		if(dados.endereco()!=null) {
-			this.endereco.atualizaInformacoes(dados.endereco());
+		if (dados.getEndereco() != null) {
+			this.endereco.atualizaInformacoes(dados.getEndereco());
 		}
-		
-		
+
 	}
 
 	public void excluir() {

@@ -21,9 +21,9 @@ public class ValidadorCancelamentoComAntecedencia implements ValidadorCancelamen
 	public void validar(CancelarAgendamentoDTO dto) {
 		// TODO Auto-generated method stub
 		LocalDateTime dataAtual = LocalDateTime.now();
-		Consulta consulta = repository.findById(dto.idConsulta()).get();
+		Consulta consulta = repository.findById(dto.getIdConsulta()).get();
 		System.out.println(consulta.getData());
-		var diferencaEmHoras = Duration.between(dataAtual, consulta.getData()).toHours();
+		long diferencaEmHoras = Duration.between(dataAtual, consulta.getData()).toHours();
 		
 		
 

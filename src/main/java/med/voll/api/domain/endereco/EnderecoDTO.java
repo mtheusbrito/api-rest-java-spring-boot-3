@@ -2,22 +2,32 @@ package med.voll.api.domain.endereco;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public record EnderecoDTO(
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class EnderecoDTO{
+	
+
 		@NotBlank
-		String logradouro,
+		private String logradouro;
 		@NotBlank
-		String bairro,
+		private String bairro;
 		@NotBlank
 		@Pattern(regexp = "\\d{8}")
-		String cep,
+		private String cep;
 		@NotBlank
-		String cidade,
+		private String cidade;
 		@NotBlank
-		String uf,
+		private String uf;
 		@NotBlank
-		String complemento,
+		private String complemento;
 		@NotBlank
-		String numero) {
+		private String numero;
 
 }

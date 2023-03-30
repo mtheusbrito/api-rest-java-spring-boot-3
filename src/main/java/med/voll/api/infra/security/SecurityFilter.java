@@ -1,14 +1,13 @@
 package med.voll.api.infra.security;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
@@ -40,14 +39,14 @@ public class SecurityFilter extends OncePerRequestFilter {
 //		ignorar header Authorization caso venha presente em rotas públicas
 		Boolean publicRoute = Arrays.asList(getPublicRoutes()).stream().anyMatch(r -> r.matches(request));
 		
-			var tokenJWT = recuperarToken(request);
+			String tokenJWT = recuperarToken(request);
 			
 			if(tokenJWT != null ) {
 				
 				if(!publicRoute) {
-					var subject = tokenService.getSubject(tokenJWT);
-					var usuario = repository.findByLogin(subject);
-					var authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
+					String subject = tokenService.getSubject(tokenJWT);
+					UserDetails usuario = repository.findByLogin(subject);
+					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(usuario, null, usuario.getAuthorities());
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 					
 				}
@@ -74,7 +73,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 	}
 
 	private String recuperarToken(HttpServletRequest request) {
-		var authorizationHeader = request.getHeader("Authorization");
+		String authorizationHeader = request.getHeader("Authorization");
 
 		if (authorizationHeader != null) {
 			return authorizationHeader.replace("Bearer ", "");

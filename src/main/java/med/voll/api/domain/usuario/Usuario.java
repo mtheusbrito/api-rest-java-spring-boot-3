@@ -1,7 +1,7 @@
 package med.voll.api.domain.usuario;
 
+import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,7 +35,7 @@ public class Usuario extends Entidade implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 	@Override
 	public String getPassword() {
@@ -69,7 +69,7 @@ public class Usuario extends Entidade implements UserDetails{
 	}
 	public Usuario(UsuarioDTO dados, String sss) {
 		
-		this.login = dados.login();
+		this.login = dados.getLogin();
 		this.senha = sss;
 	}
 	

@@ -48,7 +48,7 @@ public class Consulta extends Entidade {
 
 
 	public void cancelar(CancelarAgendamentoDTO dto) {
-		this.motivoCancelamento =dto.motivo();
+		this.motivoCancelamento =dto.getMotivo();
 		this.ativo = Boolean.FALSE;
 	}
 	

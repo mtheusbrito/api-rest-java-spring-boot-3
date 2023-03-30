@@ -5,29 +5,35 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import med.voll.api.domain.endereco.EnderecoDTO;
 
-public record MedicoDTO(
-@NotBlank(message = "{nome.obrigatorio}")
-String nome, 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class MedicoDTO {
+	@NotBlank(message = "{nome.obrigatorio}")
+	private String nome;
 
-@NotBlank(message = "{telefone.obrigatorio}")
-String telefone,
+	@NotBlank(message = "{telefone.obrigatorio}")
+	private String telefone;
 
-@NotBlank(message = "{email.obrigatorio}")
-@Email(message = "{email.invalido}")
-String email, 
+	@NotBlank(message = "{email.obrigatorio}")
+	@Email(message = "{email.invalido}")
+	private String email;
 
-@NotBlank(message = "{crm.obrigatorio}")
-@Pattern(regexp = "\\d{4,6}", message = "{crm.invalido}")
-String crm, 
+	@NotBlank(message = "{crm.obrigatorio}")
+	@Pattern(regexp = "\\d{4;6}", message = "{crm.invalido}")
+	private String crm;
 
-@NotNull(message = "{especialidade.obrigatoria}")
-Especialidade especialidade,
+	@NotNull(message = "{especialidade.obrigatoria}")
+	private Especialidade especialidade;
 
-@NotNull(message = "{endereco.obrigatorio}")
-@Valid
-EnderecoDTO endereco
-) {
-
+	@NotNull(message = "{endereco.obrigatorio}")
+	@Valid
+	private EnderecoDTO endereco;
 }

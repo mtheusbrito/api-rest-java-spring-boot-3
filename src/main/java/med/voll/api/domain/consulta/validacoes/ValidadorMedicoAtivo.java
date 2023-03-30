@@ -16,12 +16,12 @@ public class ValidadorMedicoAtivo implements ValidadorAgendamentoDeConsulta{
 	private MedicoRepository repository;
 	
 	public void validar(AgendamentoDTO agendamentoDTO) {
-		if (agendamentoDTO.idMedico() == null){
+		if (agendamentoDTO.getIdMedico() == null){
 			return ;
 			}
 			
 			
-			var medicoEstaAtivo = repository.findAtivoById(agendamentoDTO.idMedico());
+			boolean medicoEstaAtivo = repository.findAtivoById(agendamentoDTO.getIdMedico());
 			
 			if(!medicoEstaAtivo) {
 				

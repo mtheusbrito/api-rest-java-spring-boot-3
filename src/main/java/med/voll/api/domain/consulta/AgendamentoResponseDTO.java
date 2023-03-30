@@ -4,15 +4,29 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public record AgendamentoResponseDTO(
-		Long id, 
-		Long idMedico, 
-		Long idPaciente, 
-		@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-		LocalDateTime data) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class AgendamentoResponseDTO {
+	private Long id;
+	private Long idMedico;
+	private Long idPaciente;
+
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	private LocalDateTime data;
 
 	public AgendamentoResponseDTO(Consulta consulta) {
-		this(consulta.getId(), consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getData());// TODO Auto-generated constructor stub
+		this(consulta.getId(), consulta.getMedico().getId(), consulta.getPaciente().getId(), consulta.getData());// TODO
+																													// Auto-generated
+																													// constructor
+																													// stub
+
 	}
 
 }

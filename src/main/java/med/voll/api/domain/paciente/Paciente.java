@@ -40,11 +40,11 @@ public class Paciente implements Serializable {
 
 	public Paciente(@Valid PacienteDTO pacienteDTO) {
 		this.ativo = Boolean.TRUE;
-		this.nome = pacienteDTO.nome();
-		this.cpf = pacienteDTO.cpf();
-		this.email = pacienteDTO.email();
-		this.telefone = pacienteDTO.telefone();
-		this.endereco = new Endereco(pacienteDTO.endenreco());
+		this.nome = pacienteDTO.getNome();
+		this.cpf = pacienteDTO.getCpf();
+		this.email = pacienteDTO.getEmail();
+		this.telefone = pacienteDTO.getTelefone();
+		this.endereco = new Endereco(pacienteDTO.getEndenreco());
 		
 	}
 	

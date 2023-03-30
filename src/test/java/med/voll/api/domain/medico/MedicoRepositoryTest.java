@@ -97,13 +97,13 @@ class MedicoRepositoryTest {
 	}
 
 	private Medico cadastrarMedico(String nome, String email, String crm, Especialidade especialidade) {
-	    var medico = new Medico(dadosMedico(nome, email, crm, especialidade));
+		Medico medico = new Medico(dadosMedico(nome, email, crm, especialidade));
 	    entityManager.persist(medico);
 	    return medico;
 	}
 
 	private Paciente cadastrarPaciente(String nome, String email, String cpf) {
-	    var paciente = new Paciente(dadosPaciente(nome, email, cpf));
+	    Paciente paciente = new Paciente(dadosPaciente(nome, email, cpf));
 	    entityManager.persist(paciente);
 	    return paciente;
 	}

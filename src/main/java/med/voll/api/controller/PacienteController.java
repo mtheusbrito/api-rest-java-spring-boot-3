@@ -1,5 +1,7 @@
 package med.voll.api.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,9 +36,9 @@ public class PacienteController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<PacienteResponseDTO> cadastrar(@RequestBody @Valid PacienteDTO pacienteDTO, UriComponentsBuilder uriBuilder) {
-		var paciente = new Paciente(pacienteDTO);
+		Paciente paciente = new Paciente(pacienteDTO);
 		repository.save(paciente);
-		var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
+		URI uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
 		
 		return ResponseEntity.created(uri).body(new PacienteResponseDTO(paciente));
 
@@ -47,7 +49,7 @@ public class PacienteController {
 	public ResponseEntity<Page<PacienteResponseDTO>> listar(
 			@PageableDefault(size = 10, sort = { "nome" }) Pageable paginacao) {
 //		return repository.findAll().stream().map(MedicoListDTO::new).toList();
-		var page = repository.findAllByAtivoTrue(paginacao).map(PacienteResponseDTO::new);
+		Page<PacienteResponseDTO> page = repository.findAllByAtivoTrue(paginacao).map(PacienteResponseDTO::new);
 		return ResponseEntity.ok(page);
 	}
 }

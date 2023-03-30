@@ -1,5 +1,7 @@
 package med.voll.api.controller;
 
+import java.net.URI;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,10 +32,10 @@ public class UsuarioController {
 	
 	@PostMapping
 	@Transactional
-	public ResponseEntity cadastrar(@RequestBody @Valid UsuarioDTO dados,  UriComponentsBuilder uriBuilder) {
-		var usuario = new Usuario(dados, customPasswordEncoder.encode(dados.senha()));
+	public ResponseEntity<UsuarioResponseDTO> cadastrar(@RequestBody @Valid UsuarioDTO dados,  UriComponentsBuilder uriBuilder) {
+		Usuario usuario = new Usuario(dados, customPasswordEncoder.encode(dados.getSenha()));
 		repository.save(usuario);
-		var uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
+		URI uri = uriBuilder.path("/usuarios/{id}").buildAndExpand(usuario.getId()).toUri();
 		
 		return ResponseEntity.created(uri).body(new UsuarioResponseDTO(usuario));
 	}
