@@ -11,14 +11,13 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 // a classe ApiApplication deve extender a classe SpringBootServletInitializer e o metodo configure deve ser sobreescrito
 
 @SpringBootApplication
-public class ApiApplication  extends SpringBootServletInitializer{
+public class ApiApplication {
+//public class ApiApplication  extends SpringBootServletInitializer{
 	
-	
-	
-	@Override
-	  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	    return application.sources(ApiApplication.class);
-	  }
+//	@Override
+//	  protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+//	    return application.sources(ApiApplication.class);
+//	  }
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiApplication.class, args);
